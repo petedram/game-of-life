@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-<!-- {% load static %} -->
-
 
 {% block page_content %}
-<h1>Hello, World!</h1>
-<form action="/run_script/" method="GET">
-    <input type="submit" value="yuuuuuuuuup"> 
-</form>
-<button type="submit" value={{excel_path}} onclick="location.href='{% url 'downloadexcel' %}'" name='mybtn2'>Download Excel file</button>
+<h1>Game of Life</h1>
+
+<input type="button" class={{status}} name='1x1' value={{the_data}} />
+
 
 {% endblock %}
 
