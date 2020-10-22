@@ -62,8 +62,10 @@ class Grid:
         print('printing grid')
         for row in self._grid:
             for column in row:
-                print(column.print_cell(),end='')
-            print () #new line
+                #change this to add to array
+                some_array.append(column.print_cell(),end='')
+                # print(column.print_cell(),end='')
+            # print () #new line
     
     def _build_grid(self):
         #random

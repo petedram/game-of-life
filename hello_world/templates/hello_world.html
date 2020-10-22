@@ -1,10 +1,40 @@
 {% extends "base.html" %}
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/hello_world/static/style.css" />
+    </head>
+    <body>
+    {% block page_content %}
+    <div class="content container">
+        <div class="row">
+            <h1>Game of Life</h1>
+        </div>
+    </div>
+    <input type="submit" class="btn" value="Next Generation" name="mybtn">
+    <br>
+    <br>
+    <button type="button" class='add_css'>Clear</button>
+    <br>
+    <h3>Generation count: {{generation}}</h3>
+    <br>
 
-{% block page_content %}
-<h1>Game of Life</h1>
+    
+    {% for row in the_data %}
+        {% for column in row %}
+            <button type="button" class='add_css' name='1x1'  >{{ column.status }}</button>
+        {% endfor %}
+        <br>
+    {% endfor %}
+    
+    
+    {% endblock %}
+    </body>
 
-<input type="button" class={{status}} name='1x1' value={{the_data}} />
+
+</html>
 
 
-{% endblock %}
+
+
 
