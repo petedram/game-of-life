@@ -146,7 +146,6 @@ def hello_world(request):
     generation_count = 0
     rows = 10
     columns = 10
-
     grid = Grid(rows,columns)
     grid.draw_grid()
 
@@ -156,13 +155,13 @@ def hello_world(request):
 
 def next_gen(request):
     #update the status of cells based on current state
-    grid.update_board()
+    # grid.update_board()
+    my_context = {
+        "some_numbers": 1,
+    }
 
     #refresh cells on screen
     #??
-    return render(request, 'hello_world.html', {'the_data':grid._grid, 'generation':grid.generation_count})
-
-
-
+    return render(request, 'hello_world.html', my_context)
 
 

@@ -63,9 +63,9 @@ class Grid:
         for row in self._grid:
             for column in row:
                 #change this to add to array
-                some_array.append(column.print_cell(),end='')
-                # print(column.print_cell(),end='')
-            # print () #new line
+                # some_array.append(column.print_cell(),end='')
+                print(column.print_cell(),end='')
+            print () #new line
     
     def _build_grid(self):
         #random
@@ -142,17 +142,51 @@ generation_count = 0
 rows = 25
 columns = 25
 
-grid = Grid(rows,columns)
+#double buffering
+current_grid = Grid(rows,columns)
+next_grid = Grid(rows,columns)
 
-grid.draw_grid()
+
+current_grid.draw_grid()
 
 user_action = ''
 while user_action != 'q':
-    user_action = input('enter to add generation or q to quit:')
+    user_action = input('enter to add generation, glider to add a glider, q to quit or about for rules:')
 
     if user_action == '':
-        grid.update_board()
-        grid.draw_grid()
+        next_grid.update_board()
+        current_grid = next_grid #swap
+        current_grid.draw_grid()
+
+    if user_action == 'about':
+        print('Rules of the Game')
+        print('Any live cell with fewer than two live neighbours dies, as if by underpopulation.')
+        print('Any live cell with two or three live neighbours lives on to the next generation.')
+        print('Any live cell with more than three live neighbours dies, as if by overpopulation.')
+        print('Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.')
+
+    if user_action == 'clear':
+        next_grid.generation_count = 0
+        for row in next_grid._grid:
+            for column in row:
+                column.set_dead()
+
+    if user_action == 'glider':
+        next_grid.generation_count = 0
+        glider_count = 0
+        for row in next_grid._grid:
+            for column in row:
+                if glider_count in (5, 28,30, 54,55):
+                    column.set_alive()
+                else:
+                    column.set_dead()
+                glider_count+=1
+        
+        current_grid = next_grid #swap
+        current_grid.draw_grid()
+
+
+
 
 
 
